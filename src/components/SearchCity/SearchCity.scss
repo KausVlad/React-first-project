@@ -1,6 +1,12 @@
 #search {
   width: 100%;
+}
+.search {
   background-color: gold;
+  display: flex;
+  img {
+    cursor: pointer;
+  }
 }
 .search-bar {
   width: 100%;
@@ -10,6 +16,9 @@
   width: 100%;
   position: absolute;
   background-color: rgba(245, 222, 179, 0.643);
+  li {
+    cursor: pointer;
+  }
 }
 .hide {
   display: none;

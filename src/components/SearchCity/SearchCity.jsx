@@ -1,5 +1,7 @@
 import './SearchCity.scss';
-import GeocodingAPI from './GeocodingAPI';
+import cancel from './svg/cancel.svg';
+import search from './svg/search.svg';
+import GeocodingAPI from './GeocodingAPI/GeocodingAPI';
 import { useState, useEffect } from 'react';
 
 function SearchCity() {
@@ -20,7 +22,13 @@ function SearchCity() {
       } ${locationData[index].country}`
     );
   };
-  console.log(selectedLocationData);
+
+  const clearSelection = () => {
+    setSelectedLocationData({});
+    setLocationData([]);
+    setCity('');
+  };
+
   return (
     <>
       <div className="search-bar">
@@ -35,6 +43,13 @@ function SearchCity() {
             autoComplete="off"
             placeholder="Enter city like: Kyiv, UA"
           />
+          <label htmlFor="search">
+            <img
+              src={selectedState ? search : cancel}
+              alt="search/cancel"
+              onClick={!selectedState && clearSelection}
+            />
+          </label>
         </div>
         {selectedState && (
           <div className="city-tips">
