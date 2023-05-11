@@ -47,7 +47,7 @@ function SearchCity() {
             <img
               src={selectedState ? search : cancel}
               alt="search/cancel"
-              onClick={!selectedState && clearSelection}
+              onClick={!selectedState ? clearSelection : undefined}
             />
           </label>
         </div>
