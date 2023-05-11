@@ -3,8 +3,11 @@ const OPENWEATHER_API_KEY = 'b80c9a1acdfd7f1d2eff581bb8ae3bb3';
 
 const GeocodingAPI = async (onFetched, cityName) => {
   const url = `${OPENWEATHER_URL_BASE}${cityName}&limit=5&appid=${OPENWEATHER_API_KEY}`;
-  const response = await fetch(url);
-  const locationData = await response.json();
+  let response, locationData;
+  if (cityName.length > 0) {
+    response = await fetch(url);
+    locationData = await response.json();
+  }
 
   onFetched(cityName.length === 0 ? [] : locationData);
 };
