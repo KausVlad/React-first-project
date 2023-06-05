@@ -3,6 +3,7 @@
   height: 100%;
   width: 30%;
   background-color: white;
+  padding: 1rem;
 }
 .future-weather {
   border: 1px solid black;
@@ -19,9 +20,14 @@
     font-family: sans-serif;
   }
 }
+.weather-description {
+  margin-bottom: 1rem;
+}
 .weather-info {
   li {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 0.6rem;
+    border-bottom: 1px solid black;
   }
 }

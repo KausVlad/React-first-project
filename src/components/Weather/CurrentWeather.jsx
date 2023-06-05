@@ -1,6 +1,4 @@
 export default function CurrentWeather({ currentWeather }) {
-  console.log(currentWeather);
-
   const getWindDirection = (deg) => {
     const directions = {
       N: [0, 22.5],
@@ -11,6 +9,7 @@ export default function CurrentWeather({ currentWeather }) {
       SSW: [202.5, 247.5],
       W: [247.5, 292.5],
       NW: [292.5, 337.5],
+      // eslint-disable-next-line no-dupe-keys
       N: [337.5, 360],
     };
 
@@ -34,11 +33,9 @@ export default function CurrentWeather({ currentWeather }) {
         />
       </div>
       <div className="weather-description">
-        <p>
-          Weather {currentWeather.name}:{' '}
-          {currentWeather.weather[0].description.charAt(0).toUpperCase() +
-            currentWeather.weather[0].description.slice(1)}
-        </p>
+        Weather {currentWeather.name}:{' '}
+        {currentWeather.weather[0].description.charAt(0).toUpperCase() +
+          currentWeather.weather[0].description.slice(1)}
       </div>
       <ul className="weather-info">
         <li>
