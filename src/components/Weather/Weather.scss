@@ -1,0 +1,27 @@
+.current-weather {
+  border: 1px solid black;
+  height: 100%;
+  width: 30%;
+  background-color: white;
+}
+.future-weather {
+  border: 1px solid black;
+  height: 100%;
+  width: 70%;
+  background-color: white;
+}
+.weather-temperature-icon {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  p {
+    font-size: 4rem;
+    font-family: sans-serif;
+  }
+}
+.weather-info {
+  li {
+    display: flex;
+    justify-content: space-between;
+  }
+}

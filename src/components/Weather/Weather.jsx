@@ -1,5 +1,8 @@
 import WeatherAPI from './WeatherAPI/WeatherAPI';
+import CurrentWeather from './CurrentWeather';
+import FutureWeather from './FutureWeather';
 import { useState, useEffect } from 'react';
+import './Weather.scss';
 
 export default function Weather() {
   const [weatherData, setWeatherData] = useState({});
@@ -14,7 +17,12 @@ export default function Weather() {
   console.log(weatherData);
   return (
     <div className="weather">
-      <button>Weather</button>
+      {weatherData[0] ? (
+        <CurrentWeather currentWeather={weatherData[0]} />
+      ) : (
+        <p>Loading...</p>
+      )}
+      <FutureWeather />
     </div>
   );
 }
