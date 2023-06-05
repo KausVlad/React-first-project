@@ -1,4 +1,20 @@
 export default function CurrentWeather({ currentWeather }) {
+  const {
+    weather: [{ description, icon }],
+    main: {
+      temp,
+      feels_like: feelsLike,
+      temp_min: tempMin,
+      temp_max: tempMax,
+      humidity,
+      pressure,
+    },
+    wind: { speed, gust, deg },
+    sys: { sunrise, sunset },
+    visibility,
+    name,
+  } = currentWeather;
+
   const getWindDirection = (deg) => {
     const directions = {
       N: [0, 22.5],
@@ -13,8 +29,7 @@ export default function CurrentWeather({ currentWeather }) {
       N: [337.5, 360],
     };
 
-    for (const direction in directions) {
-      const [start, end] = directions[direction];
+    for (const [direction, [start, end]] of Object.entries(directions)) {
       if (deg >= start && deg < end) {
         return direction;
       }
@@ -23,69 +38,68 @@ export default function CurrentWeather({ currentWeather }) {
     return 'Unknown';
   };
 
+  function getHumanUnderstandTime(s) {
+    return new Date(s * 1000).toLocaleTimeString([], {
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+  }
+
   return (
-    <div className="current-weather">
+    <>
       <div className="weather-temperature-icon">
-        <p>+{Math.round(currentWeather.main.temp)}&deg;</p>
+        <p>+{Math.round(temp)}&deg;</p>
         <img
-          src={`http://openweathermap.org/img/wn/${currentWeather.weather[0].icon}@2x.png`}
+          src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
           alt="weather icon"
         />
       </div>
       <div className="weather-description">
-        Weather {currentWeather.name}:{' '}
-        {currentWeather.weather[0].description.charAt(0).toUpperCase() +
-          currentWeather.weather[0].description.slice(1)}
+        Weather {name}:{' '}
+        {description.charAt(0).toUpperCase() + description.slice(1)}
       </div>
       <ul className="weather-info">
         <li>
           <span>Feels like:</span>
-          <span>{Math.round(currentWeather.main.feels_like)}&deg;</span>
+          <span>{Math.round(feelsLike)}&deg;</span>
         </li>
         <li>
           <span>Min/Max temperature:</span>
           <span>
-            {Math.round(currentWeather.main.temp_min)}&deg; /{' '}
-            {Math.round(currentWeather.main.temp_max)}
-            &deg;
+            {Math.round(tempMin)}&deg; / {Math.round(tempMax)}&deg;
           </span>
         </li>
         <li>
           <span>Humidity:</span>
-          <span>{currentWeather.main.humidity}%</span>
+          <span>{humidity}%</span>
         </li>
         <li>
           <span>Pressure:</span>
-          <span>{currentWeather.main.pressure} hPa</span>
+          <span>{pressure} hPa</span>
         </li>
         <li>
           <span>Wind:</span>
           <span>
-            {currentWeather.wind.speed} m/s{' '}
-            {getWindDirection(currentWeather.wind.deg)}
+            {speed} m/s {getWindDirection(deg)}
           </span>
         </li>
         <li>
           <span>Wind dust:</span>
-          <span>{currentWeather.wind.gust} m/s</span>
+          <span>{gust} m/s</span>
         </li>
         <li>
           <span>Sunrise:</span>
-          <span>
-            {new Date(currentWeather.sys.sunrise * 1000).toLocaleTimeString()}
-          </span>
+          <span>{getHumanUnderstandTime(sunrise)}</span>
         </li>
         <li>
           <span>Sunset:</span>
-          <span>
-            {new Date(currentWeather.sys.sunset * 1000).toLocaleTimeString()}
-          </span>
+          <span>{getHumanUnderstandTime(sunset)}</span>
         </li>
         <li>
           <span>Visibility:</span>
-          <span>{currentWeather.visibility / 1000} km</span>
+          <span>{visibility / 1000} km</span>
         </li>
       </ul>
-    </div>
+    </>
   );
 }

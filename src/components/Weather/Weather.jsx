@@ -14,14 +14,16 @@ export default function Weather() {
   useEffect(() => {
     WeatherAPI(setWeatherData, coordinate);
   }, []);
-  console.log(weatherData);
+  console.log(weatherData[0]);
   return (
     <div className="weather">
-      {weatherData[0] ? (
-        <CurrentWeather currentWeather={weatherData[0]} />
-      ) : (
-        <p>Loading...</p>
-      )}
+      <div className="current-weather">
+        {weatherData[0] ? (
+          <CurrentWeather currentWeather={weatherData[0]} />
+        ) : (
+          <p>Loading...</p>
+        )}
+      </div>
       <FutureWeather />
     </div>
   );
