@@ -16,26 +16,25 @@ export default function CurrentWeather({ currentWeather }) {
   } = currentWeather;
 
   const getWindDirection = (deg) => {
-    const directions = {
-      N: [0, 22.5],
-      NNE: [22.5, 67.5],
-      E: [67.5, 112.5],
-      ESE: [112.5, 157.5],
-      S: [157.5, 202.5],
-      SSW: [202.5, 247.5],
-      W: [247.5, 292.5],
-      NW: [292.5, 337.5],
-      // eslint-disable-next-line no-dupe-keys
-      N: [337.5, 360],
-    };
+    const directions = [
+      [0, 22.5, '↑'],
+      [22.5, 67.5, '↗'],
+      [67.5, 112.5, '→'],
+      [112.5, 157.5, '↘'],
+      [157.5, 202.5, '↓'],
+      [202.5, 247.5, '↙'],
+      [247.5, 292.5, '←'],
+      [292.5, 337.5, '↖'],
+      [337.5, 360, '↑'],
+    ];
 
-    for (const [direction, [start, end]] of Object.entries(directions)) {
+    for (const [start, end, direction] of directions) {
       if (deg >= start && deg < end) {
         return direction;
       }
     }
 
-    return 'Unknown';
+    return '↺';
   };
 
   function getHumanUnderstandTime(s) {

@@ -1,6 +1,6 @@
 import WeatherAPI from './WeatherAPI/WeatherAPI';
 import CurrentWeather from './CurrentWeather';
-import FutureWeather from './FutureWeather';
+import ForecastWeather from './ForecastWeather';
 import { useState, useEffect } from 'react';
 import './Weather.scss';
 
@@ -14,7 +14,6 @@ export default function Weather() {
   useEffect(() => {
     WeatherAPI(setWeatherData, coordinate);
   }, []);
-  console.log(weatherData[0]);
   return (
     <div className="weather">
       <div className="current-weather">
@@ -24,7 +23,13 @@ export default function Weather() {
           <p>Loading...</p>
         )}
       </div>
-      <FutureWeather />
+      <div className="forecast-weather">
+        {weatherData[1] ? (
+          <ForecastWeather forecastWeather={weatherData[1]} />
+        ) : (
+          <p>Loading...</p>
+        )}
+      </div>
     </div>
   );
 }
