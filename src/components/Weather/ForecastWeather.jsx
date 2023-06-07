@@ -1,8 +1,14 @@
+import { useState } from 'react';
+
 export default function ForecastWeather({ forecastWeather: { list } }) {
+  // console.log(list);
+
+  const [forecastDay, setForecastDay] = useState(0);
+
   function getForecastModifier(allForecast) {
     for (const [key, { dt }] of allForecast.entries()) {
       const hours = new Date(dt * 1000).getUTCHours();
-      if (hours === 0) return key;
+      if (hours === 0) return 8 - key;
     }
   }
   const forecastModifier = getForecastModifier(list);
@@ -52,6 +58,7 @@ export default function ForecastWeather({ forecastWeather: { list } }) {
         const rawWeather = {
           temp: [],
           general: [],
+          id: 0,
         };
 
         for (const iterator of dayForecastSegment) {
@@ -66,15 +73,17 @@ export default function ForecastWeather({ forecastWeather: { list } }) {
         const general = getMostFrequentValue(rawWeather.general).split('@');
 
         const convertedWeatherData = {
-          month: time.getUTCMonth() + 1,
-          day: time.getUTCDate(),
+          month: (time.getUTCMonth() + 1).toString().padStart(2, '0'),
+          day: time.getUTCDate().toString().padStart(2, '0'),
           dayName: daysOfWeek[time.getUTCDay()],
           maxTemp: Math.round(Math.max(...rawWeather.temp)),
           minTemp: Math.round(Math.min(...rawWeather.temp)),
           main: general[0],
           description: general[1],
           icon: general[2],
+          id: i,
         };
+
         convertedDailyForecast.push(convertedWeatherData);
       } else {
         break;
@@ -83,16 +92,54 @@ export default function ForecastWeather({ forecastWeather: { list } }) {
     return convertedDailyForecast;
   }
 
-  console.log(getDailyForecast(list));
+  console.log(getDayForecastSegment(list, forecastDay, forecastModifier));
 
   return (
     <>
       <div className="forecast-calendar">
         <ul>
-          <li>day 1</li>
+          {getDailyForecast(list).map((day) => (
+            <li
+              key={day.id}
+              className={`${day.id === forecastDay ? 'active-day' : ''}`}
+              onClick={() => setForecastDay(day.id)}
+            >
+              <p>{day.dayName}</p>
+              <p>
+                {day.day}:{day.month}
+              </p>
+              <img
+                src={`http://openweathermap.org/img/wn/${day.icon}d@2x.png`}
+              />
+              <p>{day.maxTemp}&deg;C</p>
+              <p>{day.minTemp}&deg;C</p>
+              <p>{day.main}</p>
+              <p>{day.description}</p>
+            </li>
+          ))}
         </ul>
       </div>
-      <div className="forecast-hourly">4564</div>
+      <div className="forecast-hourly">
+        <ul>
+          {getDayForecastSegment(list, forecastDay, forecastModifier).map(
+            (hour) => (
+              <li key={hour.dt}>
+                <p>
+                  {new Date(hour.dt * 1000).toLocaleTimeString('en-uk', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    timeZone: 'UTC',
+                  })}
+                </p>
+                <p>{Math.round(hour.main.temp)}&deg;</p>
+                <img
+                  src={`http://openweathermap.org/img/wn/${hour.weather[0].icon}.png`}
+                />
+              </li>
+            )
+          )}
+        </ul>
+      </div>
     </>
   );
 }
