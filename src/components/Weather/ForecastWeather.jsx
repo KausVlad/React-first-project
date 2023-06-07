@@ -1,8 +1,4 @@
 export default function ForecastWeather({ forecastWeather: { list } }) {
-  // .map((item) => item.weather[0].icon.slice(0, 2))
-
-  // console.log(list);
-
   function getForecastModifier(allForecast) {
     for (const [key, { dt }] of allForecast.entries()) {
       const hours = new Date(dt * 1000).getUTCHours();
@@ -25,10 +21,8 @@ export default function ForecastWeather({ forecastWeather: { list } }) {
       } else {
         acc[curr]++;
       }
-      // console.log(acc);
       return acc;
     }, {});
-    // console.log(result);
 
     const mostFrequentValue = Object.keys(result).reduce((a, b) =>
       result[a] > result[b] ? a : b
@@ -37,53 +31,59 @@ export default function ForecastWeather({ forecastWeather: { list } }) {
   }
 
   function getDailyForecast(array) {
-    const dayForecastSegment = getDayForecastSegment(
-      array,
-      0,
-      forecastModifier
-    );
-    const time = new Date(dayForecastSegment[0].dt * 1000);
-    const daysOfWeek = [
-      'Sunday',
-      'Monday',
-      'Tuesday',
-      'Wednesday',
-      'Thursday',
-      'Friday',
-      'Saturday',
-    ];
-    const rawWeather = {
-      temp: [],
-      general: [],
-    };
-
-    for (const iterator of dayForecastSegment) {
-      rawWeather.temp.push(iterator.main.temp);
-      rawWeather.general.push(
-        `${iterator.weather[0].main}@${
-          iterator.weather[0].description
-        }@${iterator.weather[0].icon.slice(0, 2)}`
+    const convertedDailyForecast = [];
+    for (let i = 0; i < 10; i++) {
+      const dayForecastSegment = getDayForecastSegment(
+        array,
+        i,
+        forecastModifier
       );
+      if (dayForecastSegment.length) {
+        const time = new Date(dayForecastSegment[0].dt * 1000);
+        const daysOfWeek = [
+          'Sunday',
+          'Monday',
+          'Tuesday',
+          'Wednesday',
+          'Thursday',
+          'Friday',
+          'Saturday',
+        ];
+        const rawWeather = {
+          temp: [],
+          general: [],
+        };
+
+        for (const iterator of dayForecastSegment) {
+          rawWeather.temp.push(iterator.main.temp);
+          rawWeather.general.push(
+            `${iterator.weather[0].main}@${
+              iterator.weather[0].description
+            }@${iterator.weather[0].icon.slice(0, 2)}`
+          );
+        }
+
+        const general = getMostFrequentValue(rawWeather.general).split('@');
+
+        const convertedWeatherData = {
+          month: time.getUTCMonth() + 1,
+          day: time.getUTCDate(),
+          dayName: daysOfWeek[time.getUTCDay()],
+          maxTemp: Math.round(Math.max(...rawWeather.temp)),
+          minTemp: Math.round(Math.min(...rawWeather.temp)),
+          main: general[0],
+          description: general[1],
+          icon: general[2],
+        };
+        convertedDailyForecast.push(convertedWeatherData);
+      } else {
+        break;
+      }
     }
-
-    const general = getMostFrequentValue(rawWeather.general).split('@');
-
-    const convertedWeatherData = {
-      month: time.getUTCMonth() + 1,
-      day: time.getUTCDate(),
-      dayName: daysOfWeek[time.getUTCDay()],
-      maxTemp: Math.round(Math.max(...rawWeather.temp)),
-      minTemp: Math.round(Math.min(...rawWeather.temp)),
-      general: general,
-      main: general[0],
-      description: general[1],
-      icon: general[2],
-    };
-
-    console.log(rawWeather, convertedWeatherData);
+    return convertedDailyForecast;
   }
 
-  getDailyForecast(list);
+  console.log(getDailyForecast(list));
 
   return (
     <>
