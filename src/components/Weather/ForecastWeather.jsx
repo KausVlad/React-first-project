@@ -135,6 +135,16 @@ export default function ForecastWeather({ forecastWeather: { list } }) {
                 <img
                   src={`http://openweathermap.org/img/wn/${hour.weather[0].icon}.png`}
                 />
+                <p>
+                  {hour.rain || hour.snow
+                    ? `${hour.rain['3h'] || hour.snow['3h']} mm`
+                    : 'dry'}
+                </p>
+                <p>
+                  {hour.wind.speed} m/s {hour.wind.deg}
+                </p>
+                <p>{hour.main.pressure} hPa</p>
+                <p>{hour.main.humidity}%</p>
               </li>
             )
           )}
