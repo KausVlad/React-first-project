@@ -38,8 +38,9 @@
   background-color: antiquewhite;
   ul {
     height: 100%;
-    display: flex;
-    gap: 1rem;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: 1fr;
     justify-content: space-between;
   }
 }

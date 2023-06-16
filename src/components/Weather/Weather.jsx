@@ -1,31 +1,43 @@
 import WeatherAPI from './WeatherAPI/WeatherAPI';
 import CurrentWeather from './CurrentWeather';
 import ForecastWeather from './ForecastWeather';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import './Weather.scss';
+import { setWeather } from '../../store/weatherState/weatherState.slice';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function Weather() {
-  const [weatherData, setWeatherData] = useState({});
-  const coordinate = {
-    lat: 50.4500336,
-    lon: 30.5241361,
-  };
+  const dispatch = useDispatch();
+
+  const { coordinate, currentWeather, forecastWeather } = useSelector(
+    (state) => state.weatherState
+  );
 
   useEffect(() => {
-    WeatherAPI(setWeatherData, coordinate);
-  }, []);
+    const fetchData = async () => {
+      const data = await WeatherAPI(
+        coordinate || {
+          lat: 50.4500336,
+          lon: 30.5241361,
+        }
+      );
+      dispatch(setWeather(data));
+    };
+    fetchData();
+  }, [coordinate, dispatch]);
+
   return (
     <div className="weather">
       <div className="current-weather">
-        {weatherData[0] ? (
-          <CurrentWeather currentWeather={weatherData[0]} />
+        {currentWeather ? (
+          <CurrentWeather currentWeather={currentWeather} />
         ) : (
           <p>Loading...</p>
         )}
       </div>
       <div className="forecast-weather">
-        {weatherData[1] ? (
-          <ForecastWeather forecastWeather={weatherData[1]} />
+        {forecastWeather ? (
+          <ForecastWeather forecastWeather={forecastWeather} />
         ) : (
           <p>Loading...</p>
         )}

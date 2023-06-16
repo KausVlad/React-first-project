@@ -3,8 +3,17 @@ import cancel from './svg/cancel.svg';
 import search from './svg/search.svg';
 import GeocodingAPI from './GeocodingAPI/GeocodingAPI';
 import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  setCoordinate,
+  resetCoordinate,
+} from '../../store/weatherState/weatherState.slice';
 
 function SearchCity() {
+  const dispatch = useDispatch();
+
+  const { coordinate } = useSelector((state) => state.weatherState);
+
   const [cityName, setCity] = useState('');
   const [locationData, setLocationData] = useState([]);
   const [selectedLocationData, setSelectedLocationData] = useState({});
@@ -16,6 +25,7 @@ function SearchCity() {
 
   const handleClick = (index) => {
     setSelectedLocationData(locationData[index]);
+    dispatch(setCoordinate(locationData[index]));
     setCity(
       `${locationData[index].name}, ${
         locationData[index].state ? `${locationData[index].state}, ` : ''
@@ -23,8 +33,11 @@ function SearchCity() {
     );
   };
 
+  console.log(coordinate);
+
   const clearSelection = () => {
     setSelectedLocationData({});
+    dispatch(resetCoordinate());
     setLocationData([]);
     setCity('');
   };
