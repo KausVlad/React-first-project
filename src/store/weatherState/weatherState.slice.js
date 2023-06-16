@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const weatherStateSlice = createSlice({
   name: 'weather',
   initialState: {
-    coordinate: null,
+    coordinate: {},
     currentWeather: null,
     forecastWeather: null,
   },
@@ -17,7 +17,7 @@ export const weatherStateSlice = createSlice({
       state.coordinate = { lat, lon };
     },
     resetCoordinate: (state) => {
-      state.coordinate = null;
+      state.coordinate = {};
     },
   },
 });

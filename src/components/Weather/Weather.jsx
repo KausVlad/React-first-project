@@ -16,10 +16,12 @@ export default function Weather() {
   useEffect(() => {
     const fetchData = async () => {
       const data = await WeatherAPI(
-        coordinate || {
-          lat: 50.4500336,
-          lon: 30.5241361,
-        }
+        Object.keys(coordinate).length === 0
+          ? {
+              lat: 50.4500336,
+              lon: 30.5241361,
+            }
+          : coordinate
       );
       dispatch(setWeather(data));
     };

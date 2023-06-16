@@ -16,15 +16,13 @@ function SearchCity() {
 
   const [cityName, setCity] = useState('');
   const [locationData, setLocationData] = useState([]);
-  const [selectedLocationData, setSelectedLocationData] = useState({});
-  let selectedState = Object.keys(selectedLocationData).length === 0;
+  let selectedState = Object.keys(coordinate).length === 0;
 
   useEffect(() => {
     GeocodingAPI(setLocationData, cityName);
   }, [cityName]);
 
   const handleClick = (index) => {
-    setSelectedLocationData(locationData[index]);
     dispatch(setCoordinate(locationData[index]));
     setCity(
       `${locationData[index].name}, ${
@@ -36,7 +34,6 @@ function SearchCity() {
   console.log(coordinate);
 
   const clearSelection = () => {
-    setSelectedLocationData({});
     dispatch(resetCoordinate());
     setLocationData([]);
     setCity('');
