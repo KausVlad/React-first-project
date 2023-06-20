@@ -68,3 +68,64 @@
 .active-day {
   background-color: antiquewhite;
 }
+
+@media (max-width: 1001px) {
+  .weather-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 1rem;
+  }
+}
+@media (max-width: 700px) {
+  .forecast-calendar {
+    width: 40%;
+    ul {
+      flex-direction: column;
+      li {
+        height: 7rem;
+        max-width: none;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+        grid-template-areas:
+          'forecast-day  forecast-max'
+          'forecast-day-name forecast-min'
+          'forecast-icon forecast-main'
+          'forecast-icon forecast-description';
+      }
+    }
+  }
+  .forecast-day {
+    grid-area: forecast-day;
+  }
+  .forecast-icon {
+    grid-area: forecast-icon;
+  }
+  .forecast-max {
+    grid-area: forecast-max;
+  }
+  .forecast-min {
+    grid-area: forecast-min;
+  }
+  .forecast-day-name {
+    grid-area: forecast-day-name;
+  }
+  .forecast-day-date {
+    grid-area: forecast-day-date;
+  }
+  .forecast-description {
+    grid-area: forecast-description;
+  }
+
+  .forecast-hourly {
+    width: 60%;
+    ul {
+      grid-template-rows: repeat(8, 1fr);
+      grid-template-columns: 1fr;
+      li {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  }
+}

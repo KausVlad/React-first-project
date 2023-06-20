@@ -10,22 +10,35 @@
 }
 .weather {
   width: 100%;
-  height: 500px;
   background-color: red;
   display: flex;
 }
 .current-weather {
   border: 1px solid black;
-  height: 100%;
   width: 30%;
   background-color: white;
   padding: 1rem;
 }
 .forecast-weather {
   border: 1px solid black;
-  height: 100%;
   width: 70%;
   background-color: white;
   display: flex;
   flex-direction: column;
+}
+@media (max-width: 1001px) {
+  .weather {
+    flex-direction: column;
+  }
+  .current-weather {
+    width: auto;
+  }
+  .forecast-weather {
+    width: auto;
+  }
+}
+@media (max-width: 700px) {
+  .forecast-weather {
+    flex-direction: row;
+  }
 }

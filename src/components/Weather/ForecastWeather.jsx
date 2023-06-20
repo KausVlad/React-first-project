@@ -21,17 +21,18 @@ export default function ForecastWeather({ forecastWeather: { list } }) {
               className={`${day.id === forecastDay ? 'active-day' : ''}`}
               onClick={() => setForecastDay(day.id)}
             >
-              <p>{day.dayName}</p>
-              <p>
+              <p className="forecast-day">{day.dayName}</p>
+              <p className="forecast-date">
                 {day.day}:{day.month}
               </p>
               <img
+                className="forecast-icon"
                 src={`http://openweathermap.org/img/wn/${day.icon}d@2x.png`}
               />
-              <p>{day.maxTemp}&deg;C</p>
-              <p>{day.minTemp}&deg;C</p>
-              <p>{day.main}</p>
-              <p>{day.description}</p>
+              <p className="forecast-max">{day.maxTemp}&deg;C</p>
+              <p className="forecast-min">{day.minTemp}&deg;C</p>
+              <p className="forecast-main">{day.main}</p>
+              <p className="forecast-description">{day.description}</p>
             </li>
           ))}
         </ul>
