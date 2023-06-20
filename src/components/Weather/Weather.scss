@@ -2,6 +2,27 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  div {
+    display: grid;
+    grid-template: repeat(2, 1fr) / repeat(2, 1fr);
+    grid-template-areas:
+      'weather-temperature umbrella'
+      'weather-temperature clothing-tips';
+    img {
+      width: 2rem;
+      height: auto;
+    }
+  }
+  .weather-temperature {
+    grid-area: weather-temperature;
+  }
+  .umbrella {
+    grid-area: umbrella;
+  }
+  .clothing-tips {
+    grid-area: clothing-tips;
+  }
+
   p {
     font-size: 4rem;
     font-family: sans-serif;

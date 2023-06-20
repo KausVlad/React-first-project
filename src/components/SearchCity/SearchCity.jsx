@@ -31,8 +31,6 @@ function SearchCity() {
     );
   };
 
-  console.log(coordinate);
-
   const clearSelection = () => {
     dispatch(resetCoordinate());
     setLocationData([]);

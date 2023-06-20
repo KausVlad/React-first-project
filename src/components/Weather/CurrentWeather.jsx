@@ -1,5 +1,6 @@
-import { getWindDirection } from './utils/getWindDirection';
+import { getWindDirection } from './CurrentWeatherHelpers/getWindDirection';
 import { getHumanUnderstandTime } from './utils/getHumanUnderstandTime';
+import { getClothingTips } from './CurrentWeatherHelpers/getClothingTips';
 
 export default function CurrentWeather({ currentWeather }) {
   const {
@@ -18,10 +19,28 @@ export default function CurrentWeather({ currentWeather }) {
     name,
   } = currentWeather;
 
+  const [clothingTips, umbrellaStatus] = getClothingTips(temp, icon);
+
   return (
     <>
       <div className="weather-temperature-icon">
-        <p>+{Math.round(temp)}&deg;</p>
+        <div>
+          <p className="weather-temperature">+{Math.round(temp)}&deg;</p>
+          {umbrellaStatus ? (
+            <img
+              className="umbrella"
+              src={`/images/umbrella.png`}
+              alt="umbrella"
+            />
+          ) : (
+            <></>
+          )}
+          <img
+            className="clothing-tips"
+            src={`/images/${clothingTips}.png`}
+            alt="Tips"
+          />
+        </div>
         <img
           src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
           alt="weather icon"
