@@ -29,8 +29,9 @@ export default function ForecastWeather({ forecastWeather: { list } }) {
                 className="forecast-icon"
                 src={`http://openweathermap.org/img/wn/${day.icon}d@2x.png`}
               />
-              <p className="forecast-max">{day.maxTemp}&deg;C</p>
-              <p className="forecast-min">{day.minTemp}&deg;C</p>
+              <p className="forecast-temp">
+                {day.maxTemp}&deg; {day.minTemp}&deg;
+              </p>
               <p className="forecast-main">{day.main}</p>
               <p className="forecast-description">{day.description}</p>
             </li>

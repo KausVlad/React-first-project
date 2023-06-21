@@ -1,25 +1,49 @@
 #search {
   width: 100%;
-}
-.search {
-  background-color: gold;
-  display: flex;
-  img {
-    cursor: pointer;
+  &:focus {
+    .city-tips {
+      padding: 0.5rem;
+    }
   }
 }
+
+.search {
+  font-size: 1.5rem;
+  border-bottom: 0.15rem solid #084685;
+  padding: 0.1rem;
+  margin: 1rem;
+  display: flex;
+
+  img {
+    cursor: pointer;
+    height: 1.5rem;
+  }
+}
+
 .search-bar {
   width: 100%;
   position: relative;
 }
+
 .city-tips {
-  width: 100%;
+  font-size: 1.1rem;
+  left: 1%;
+  top: 75%;
+  width: 98%;
   position: absolute;
-  background-color: rgba(245, 222, 179, 0.643);
+  background-color: #08294c6a;
+  backdrop-filter: blur(5px);
   li {
+    list-style-type: none;
     cursor: pointer;
+    margin-bottom: 0.5rem;
+    border-bottom: 0.1rem dashed #1367be;
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
+
 .hide {
   display: none;
 }
