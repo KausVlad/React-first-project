@@ -52,44 +52,50 @@ export default function CurrentWeather({ currentWeather }) {
       </div>
       <ul className="weather-info">
         <li>
-          <span>Feels like:</span>
-          <span>{Math.round(feelsLike)}&deg;</span>
-        </li>
-        <li>
-          <span>Min/Max temperature:</span>
-          <span>
-            {Math.round(tempMin)}&deg; / {Math.round(tempMax)}&deg;
+          <span className="weather-info-label">Feels like:</span>
+          <span className="weather-info-value">
+            {Math.round(feelsLike)}&deg;
           </span>
         </li>
         <li>
-          <span>Humidity:</span>
-          <span>{humidity}%</span>
+          <span className="weather-info-label">Max/Min temperature:</span>
+          <span className="weather-info-value">
+            {Math.round(tempMax)}&deg; / {Math.round(tempMin)}&deg;
+          </span>
         </li>
         <li>
-          <span>Pressure:</span>
-          <span>{pressure} hPa</span>
+          <span className="weather-info-label">Humidity:</span>
+          <span className="weather-info-value">{humidity}%</span>
         </li>
         <li>
-          <span>Wind:</span>
-          <span>
+          <span className="weather-info-label">Pressure:</span>
+          <span className="weather-info-value">{pressure} hPa</span>
+        </li>
+        <li>
+          <span className="weather-info-label">Wind:</span>
+          <span className="weather-info-value">
             {speed} m/s {getWindDirection(deg)}
           </span>
         </li>
         <li>
-          <span>Wind dust:</span>
-          <span>{gust} m/s</span>
+          <span className="weather-info-label">Wind dust:</span>
+          <span className="weather-info-value">{gust} m/s</span>
         </li>
         <li>
-          <span>Sunrise:</span>
-          <span>{getHumanUnderstandTime(sunrise)}</span>
+          <span className="weather-info-label">Sunrise:</span>
+          <span className="weather-info-value">
+            {getHumanUnderstandTime(sunrise)}
+          </span>
         </li>
         <li>
-          <span>Sunset:</span>
-          <span>{getHumanUnderstandTime(sunset)}</span>
+          <span className="weather-info-label">Sunset:</span>
+          <span className="weather-info-value">
+            {getHumanUnderstandTime(sunset)}
+          </span>
         </li>
         <li>
-          <span>Visibility:</span>
-          <span>{visibility / 1000} km</span>
+          <span className="weather-info-label">Visibility:</span>
+          <span className="weather-info-value">{visibility / 1000} km</span>
         </li>
       </ul>
     </>

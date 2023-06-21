@@ -3,6 +3,7 @@ import { getWindDirection } from './CurrentWeatherHelpers/getWindDirection';
 import { getForecastModifier } from './ForecastWeatherHelpers/getForecastModifier';
 import { getDayForecastSegment } from './ForecastWeatherHelpers/getDayForecastSegment';
 import { getDailyForecast } from './ForecastWeatherHelpers/getDailyForecast';
+import { getWeakenedDay } from './ForecastWeatherHelpers/getWeakenedDay';
 
 export default function ForecastWeather({ forecastWeather: { list } }) {
   // console.log(list);
@@ -21,8 +22,10 @@ export default function ForecastWeather({ forecastWeather: { list } }) {
               className={`${day.id === forecastDay ? 'active-day' : ''}`}
               onClick={() => setForecastDay(day.id)}
             >
-              <p className="forecast-day">{day.dayName}</p>
-              <p className="forecast-date">
+              <p className={`forecast-day ${getWeakenedDay(day.dayName)}`}>
+                {day.dayName}
+              </p>
+              <p className={`forecast-date ${getWeakenedDay(day.dayName)}`}>
                 {day.day}:{day.month}
               </p>
               <img
@@ -30,7 +33,8 @@ export default function ForecastWeather({ forecastWeather: { list } }) {
                 src={`http://openweathermap.org/img/wn/${day.icon}d@2x.png`}
               />
               <p className="forecast-temp">
-                {day.maxTemp}&deg; {day.minTemp}&deg;
+                <span className="forecast-max-temp">{day.maxTemp}&deg;</span>{' '}
+                <span className="forecast-min-temp">{day.minTemp}&deg;</span>
               </p>
               <p className="forecast-main">{day.main}</p>
               <p className="forecast-description">{day.description}</p>
@@ -50,20 +54,21 @@ export default function ForecastWeather({ forecastWeather: { list } }) {
                     timeZone: 'UTC',
                   })}
                 </p>
-                <p>{Math.round(hour.main.temp)}&deg;</p>
+                <p className="forecast-temp">
+                  {Math.round(hour.main.temp)}&deg;
+                </p>
                 <img
                   src={`http://openweathermap.org/img/wn/${hour.weather[0].icon}@2x.png`}
                 />
+                <p>{getWindDirection(hour.wind.deg)}</p>
+                <p>{hour.wind.speed} m/s</p>
                 <p>
                   {hour.rain || hour.snow
                     ? `${hour.rain['3h'] || hour.snow['3h']} mm`
                     : 'dry'}
                 </p>
-                <p>
-                  {hour.wind.speed} m/s {getWindDirection(hour.wind.deg)}
-                </p>
-                <p>{hour.main.pressure} hPa</p>
                 <p>{hour.main.humidity}%</p>
+                <p>{hour.main.pressure} hPa</p>
               </li>
             )
           )}
