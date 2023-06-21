@@ -1,3 +1,5 @@
+@use '../../assets/scss/variables' as var;
+
 #search {
   width: 100%;
   &:focus {
@@ -9,7 +11,7 @@
 
 .search {
   font-size: 1.5rem;
-  border-bottom: 0.15rem solid #084685;
+  border-bottom: 0.15rem solid var.$color-2;
   padding: 0.1rem;
   margin: 1rem;
   display: flex;
@@ -37,7 +39,7 @@
     list-style-type: none;
     cursor: pointer;
     margin-bottom: 0.5rem;
-    border-bottom: 0.1rem dashed #1367be;
+    border-bottom: 0.1rem dashed var.$color-3;
     &:hover {
       text-decoration: underline;
     }

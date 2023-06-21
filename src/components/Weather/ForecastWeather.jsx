@@ -52,7 +52,7 @@ export default function ForecastWeather({ forecastWeather: { list } }) {
                 </p>
                 <p>{Math.round(hour.main.temp)}&deg;</p>
                 <img
-                  src={`http://openweathermap.org/img/wn/${hour.weather[0].icon}.png`}
+                  src={`http://openweathermap.org/img/wn/${hour.weather[0].icon}@2x.png`}
                 />
                 <p>
                   {hour.rain || hour.snow

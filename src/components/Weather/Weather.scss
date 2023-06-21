@@ -1,3 +1,5 @@
+@use '../../assets/scss/variables' as var;
+
 .weather-temperature-icon {
   display: flex;
   justify-content: space-between;
@@ -13,12 +15,15 @@
       height: auto;
     }
   }
+
   .weather-temperature {
     grid-area: weather-temperature;
   }
+
   .umbrella {
     grid-area: umbrella;
   }
+
   .clothing-tips {
     grid-area: clothing-tips;
   }
@@ -38,13 +43,14 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 0.6rem;
-    border-bottom: 0.1rem solid #084685;
+    border-bottom: 0.1rem solid var.$color-2;
     padding-bottom: 0.4rem;
   }
 }
+
 .forecast-calendar {
-  background: #1e569b;
-  height: 50%;
+  background: var.$color-4;
+  flex-grow: 1;
   ul {
     height: 100%;
     display: flex;
@@ -56,32 +62,39 @@
       flex-direction: column;
       justify-content: space-between;
       align-items: center;
-      border-right: 0.2rem solid #1367be;
-      border-bottom: 0.1rem solid #1367be;
+      border-right: 0.2rem solid var.$color-3;
+      border-bottom: 0.1rem solid var.$color-3;
       &:last-child {
         border-right: none;
       }
     }
     .active-day {
+      p {
+        text-shadow: 2px 2px 20px var.$color-1;
+      }
       border-bottom: none;
     }
   }
 }
+
 .forecast-icon {
   max-width: 4rem;
 }
+
 .forecast-description {
   display: inline-block;
   max-width: min-content;
   text-align: center;
 }
+
 .forecast-hourly {
   font-size: 0.8rem;
   padding: 1rem;
-  height: 50%;
-  background-color: #084685;
+  flex-grow: 1;
+  background-color: var.$color-2;
   p {
-    margin-bottom: 0.1rem;
+    text-shadow: 2px 2px 20px var.$color-1;
+    margin-bottom: 0.2rem;
   }
   ul {
     height: 100%;
@@ -92,11 +105,15 @@
     grid-gap: 1rem;
   }
   li {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     text-align: center;
   }
 }
+
 .active-day {
-  background-color: #084685;
+  background-color: var.$color-2;
 }
 
 @media (max-width: 955px) {
@@ -106,6 +123,7 @@
     column-gap: 1rem;
   }
 }
+
 @media (max-width: 600px) {
   .forecast-calendar {
     height: auto;
@@ -124,12 +142,12 @@
           'forecast-icon forecast-description'
           'forecast-icon forecast-description';
         // gap: 1rem;
-        border-right: 0.1rem solid #1367be;
-        border-bottom: 0.2rem solid #1367be;
+        border-right: 0.1rem solid var.$color-3;
+        border-bottom: 0.2rem solid var.$color-3;
       }
       .active-day {
         border-right: none;
-        border-bottom: 0.2rem solid #1367be;
+        border-bottom: 0.2rem solid var.$color-3;
       }
     }
   }

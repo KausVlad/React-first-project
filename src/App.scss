@@ -1,3 +1,4 @@
+@use './assets/scss/variables' as var;
 @import './assets/scss/reset';
 
 .background {
@@ -5,8 +6,8 @@
   justify-content: center;
 }
 .container {
-  box-shadow: 0px 5px 60px 2px #a5a8ab;
-  background: #1367be;
+  box-shadow: 2px 5px 20px 2px #a5a8ab;
+  background: var.$color-3;
   font-family: sans-serif;
   color: #fff;
   margin: 0.5rem;
