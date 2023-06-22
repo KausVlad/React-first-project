@@ -53,6 +53,7 @@
 
 .forecast-calendar {
   background: var.$color-4;
+
   flex-grow: 1;
   cursor: pointer;
 
@@ -80,10 +81,16 @@
     .active-day {
       p {
         text-shadow: 2px 2px 20px var.$color-1;
+        transition: text-shadow 0.3s ease;
       }
       border-bottom: none;
     }
   }
+}
+
+.active-day {
+  background-color: var.$color-2;
+  transition: background-color 0.3s ease;
 }
 
 .forecast-day {
@@ -150,10 +157,6 @@
     justify-content: center;
     text-align: center;
   }
-}
-
-.active-day {
-  background-color: var.$color-2;
 }
 
 @media (max-width: 955px) {
