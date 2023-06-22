@@ -51,6 +51,7 @@
 .forecast-calendar {
   background: var.$color-4;
   flex-grow: 1;
+  cursor: pointer;
   ul {
     height: 100%;
     display: flex;
