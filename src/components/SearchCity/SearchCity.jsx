@@ -2,7 +2,7 @@ import './SearchCity.scss';
 import cancel from './svg/cancel.svg';
 import search from './svg/search.svg';
 import GeocodingAPI from './GeocodingAPI/GeocodingAPI';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   setCoordinate,
@@ -17,9 +17,20 @@ function SearchCity() {
   const [cityName, setCity] = useState('');
   const [locationData, setLocationData] = useState([]);
   let selectedState = Object.keys(coordinate).length === 0;
+  const timeoutIdRef = useRef(null);
 
   useEffect(() => {
-    GeocodingAPI(setLocationData, cityName);
+    const debouncedGeocodingAPI = () => {
+      GeocodingAPI(setLocationData, cityName);
+    };
+
+    clearTimeout(timeoutIdRef.current);
+
+    timeoutIdRef.current = setTimeout(debouncedGeocodingAPI, 500);
+
+    return () => {
+      clearTimeout(timeoutIdRef.current);
+    };
   }, [cityName]);
 
   const handleClick = (index) => {
