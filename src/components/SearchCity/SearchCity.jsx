@@ -7,12 +7,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   setCoordinate,
   resetCoordinate,
+  setCityName,
+  resetCityName,
 } from '../../store/weatherState/weatherState.slice';
 
 function SearchCity() {
   const dispatch = useDispatch();
 
-  const { coordinate } = useSelector((state) => state.weatherState);
+  const { coordinate, cityNameFull } = useSelector(
+    (state) => state.weatherState
+  );
 
   const [cityName, setCity] = useState('');
   const [locationData, setLocationData] = useState([]);
@@ -35,17 +39,17 @@ function SearchCity() {
 
   const handleClick = (index) => {
     dispatch(setCoordinate(locationData[index]));
-    setCity(
-      `${locationData[index].name}, ${
-        locationData[index].state ? `${locationData[index].state}, ` : ''
-      } ${locationData[index].country}`
-    );
+    dispatch(setCityName(locationData[index]));
   };
+
+  useEffect(() => {
+    setCity(cityNameFull);
+  }, [cityNameFull]);
 
   const clearSelection = () => {
     dispatch(resetCoordinate());
+    dispatch(resetCityName());
     setLocationData([]);
-    setCity('');
   };
 
   return (
