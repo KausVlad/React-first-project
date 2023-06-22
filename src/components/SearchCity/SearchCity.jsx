@@ -60,7 +60,7 @@ function SearchCity() {
             value={cityName}
             onChange={(e) => setCity(e.target.value)}
             autoComplete="off"
-            placeholder="Enter city like: Kyiv, UA"
+            placeholder="Enter city: Kyiv, UA"
           />
           <label htmlFor="search">
             <img
