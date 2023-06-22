@@ -58,9 +58,14 @@ export default function CurrentWeather({ currentWeather }) {
           </span>
         </li>
         <li>
-          <span className="weather-info-label">Max/Min temperature:</span>
+          <span className="weather-info-label">Max/Min C&deg;:</span>
           <span className="weather-info-value">
-            {Math.round(tempMax)}&deg; / {Math.round(tempMin)}&deg;
+            <span className="forecast-max-temp">
+              {Math.round(tempMax)}&deg;
+            </span>{' '}
+            <span className="forecast-min-temp">
+              {Math.round(tempMin)}&deg;
+            </span>
           </span>
         </li>
         <li>

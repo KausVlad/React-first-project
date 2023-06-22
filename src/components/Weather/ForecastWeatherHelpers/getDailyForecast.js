@@ -12,13 +12,13 @@ export function getDailyForecast(array, forecastModifier) {
     if (dayForecastSegment.length) {
       const time = new Date(dayForecastSegment[0].dt * 1000);
       const daysOfWeek = [
-        'Sunday',
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday',
+        ['Sunday', 'Sun'],
+        ['Monday', 'Mon'],
+        ['Tuesday', 'Tue'],
+        ['Wednesday', 'Wed'],
+        ['Thursday', 'Thu'],
+        ['Friday', 'Fri'],
+        ['Saturday', 'Sat'],
       ];
       const rawWeather = {
         temp: [],

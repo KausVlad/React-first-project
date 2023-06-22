@@ -39,6 +39,7 @@
 .weather-info-value {
   text-shadow: 2px 2px 15px var.$color-1;
   font-weight: bolder;
+  text-align: right;
 }
 
 .forecast-weather {
@@ -56,6 +57,9 @@
   }
   .forecast-weather {
     width: auto;
+  }
+  .container {
+    width: 100%;
   }
 }
 
