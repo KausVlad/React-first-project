@@ -19,7 +19,7 @@
 }
 
 .search-bar {
-  width: 100%;
+  width: 33%;
   position: relative;
 }
 
@@ -50,4 +50,10 @@
 
 .hide {
   display: none;
+}
+
+@media (max-width: 955px) {
+  .search-bar {
+    width: 100%;
+  }
 }

@@ -19,6 +19,11 @@
   flex-direction: column;
 }
 
+.header {
+  width: 100%;
+  display: flex;
+}
+
 .weather {
   width: 100%;
 
@@ -58,6 +63,9 @@
 @media (max-width: 955px) {
   .weather {
     flex-direction: column;
+  }
+  .header {
+    flex-direction: column-reverse;
   }
   .current-weather {
     width: auto;
