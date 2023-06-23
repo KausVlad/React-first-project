@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import './Weather.scss';
 import { setWeather } from '../../store/weatherState/weatherState.slice';
 import { useDispatch, useSelector } from 'react-redux';
+import { LoadingSpinner } from './Loader';
 
 export default function Weather() {
   const dispatch = useDispatch();
@@ -34,14 +35,14 @@ export default function Weather() {
         {currentWeather ? (
           <CurrentWeather currentWeather={currentWeather} />
         ) : (
-          <p>Loading...</p>
+          <LoadingSpinner />
         )}
       </div>
       <div className="forecast-weather">
         {forecastWeather ? (
           <ForecastWeather forecastWeather={forecastWeather} />
         ) : (
-          <p>Loading...</p>
+          <LoadingSpinner />
         )}
       </div>
     </div>
