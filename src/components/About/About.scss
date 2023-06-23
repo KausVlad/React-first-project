@@ -1,0 +1,34 @@
+@use '../../assets/scss/variables' as var;
+
+.about-background {
+  display: flex;
+  justify-content: center;
+}
+
+.about-container {
+  max-width: 1200px;
+}
+
+.about {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas:
+    'about1 about1 about-img1'
+    'about-img2 about2 about2';
+}
+
+.about1 {
+  grid-area: about1;
+}
+
+.about-img1 {
+  grid-area: about-img1;
+}
+
+.about2 {
+  grid-area: about2;
+}
+
+.about-img2 {
+  grid-area: about-img2;
+}
