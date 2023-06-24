@@ -5,24 +5,51 @@ export function About() {
   return (
     <div className="about-background">
       <div className="about-container">
-        <h1>About</h1>
-        <div className="about">
-          <p className="about1">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorem
-            dolore excepturi facere expedita iure eum. Placeat facere libero
-            iure ea atque, laboriosam corrupti odit repellat voluptatibus modi
-            sunt obcaecati maxime!
-          </p>
-          <img className="about-img1" src="public\images\1T.gif" alt="1" />
-          <p className="about2">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorem
-            dolore excepturi facere expedita iure eum. Placeat facere libero
-            iure ea atque, laboriosam corrupti odit repellat voluptatibus modi
-            sunt obcaecati maxime!
-          </p>
-          <img className="about-img2" src="public\images\1T.gif" alt="1" />
+        <div className="about-inf">
+          <NavLink to="/about">About</NavLink>
+          <NavLink to="/">Back to Weather App</NavLink>
         </div>
-        <NavLink to="/">back</NavLink>
+        <div className="about">
+          <div className="about-common about1">
+            <p>
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorem
+              dolore excepturi facere expedita iure eum. Placeat facere libero
+              iure ea atque, laboriosam corrupti odit repellat voluptatibus modi
+              sunt obcaecati maxime!
+            </p>
+            <img src="/images/1T.gif" alt="1" />
+          </div>
+
+          <div className="about-common about2">
+            <p>
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorem
+              dolore excepturi facere expedita iure eum. Placeat facere libero
+              iure ea atque, laboriosam corrupti odit repellat voluptatibus modi
+              sunt obcaecati maxime!
+            </p>
+            <img src="/images/1T.gif" alt="1" />
+          </div>
+
+          <div className="about-common about1">
+            <p>
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorem
+              dolore excepturi facere expedita iure eum. Placeat facere libero
+              iure ea atque, laboriosam corrupti odit repellat voluptatibus modi
+              sunt obcaecati maxime!
+            </p>
+            <img src="/images/1T.gif" alt="1" />
+          </div>
+
+          <div className="about-common about2">
+            <p>
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorem
+              dolore excepturi facere expedita iure eum. Placeat facere libero
+              iure ea atque, laboriosam corrupti odit repellat voluptatibus modi
+              sunt obcaecati maxime!
+            </p>
+            <img src="/images/1T.gif" alt="1" />
+          </div>
+        </div>
       </div>
     </div>
   );
