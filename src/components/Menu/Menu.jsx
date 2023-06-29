@@ -7,7 +7,7 @@ export function Menu() {
       <NavLink className="about-link" to="/about">
         About
       </NavLink>
-      <p>Sign in</p>
+      <NavLink to="/login">Log in</NavLink>
     </div>
   );
 }
