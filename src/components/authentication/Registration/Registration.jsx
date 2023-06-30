@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
 
-export function Login() {
+export function Registration() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -21,8 +20,7 @@ export function Login() {
         onChange={(e) => setPassword(e.target.value)}
         value={password}
       />
-      <button>Login</button>
-      <NavLink to="/registration">Sign up</NavLink>
+      <button>Sign up</button>
     </div>
   );
 }
