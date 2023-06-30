@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { testFetch } from '../../../store/auth/auth.actions';
+import { login, logout } from '../../../store/auth/auth.actions';
 
 export function Login() {
   const dispatch = useDispatch();
@@ -31,11 +31,12 @@ export function Login() {
       />
       <button
         onClick={() => {
-          dispatch(testFetch());
+          dispatch(login({ email, password }));
         }}
       >
         Login
       </button>
+      <button onClick={() => dispatch(logout())}>\out\</button>
       <NavLink to="/registration">Sign up</NavLink>
     </div>
   );

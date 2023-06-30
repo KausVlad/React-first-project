@@ -1,8 +1,16 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { reg } from '../../../store/auth/auth.actions';
 
 export function Registration() {
+  const dispatch = useDispatch();
+
+  const { status, testU, error, userName } = useSelector((state) => state.auth);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  console.log(status, testU, error, userName);
 
   return (
     <div>
@@ -20,7 +28,9 @@ export function Registration() {
         onChange={(e) => setPassword(e.target.value)}
         value={password}
       />
-      <button>Sign up</button>
+      <button onClick={() => dispatch(reg({ email, password }))}>
+        Sign up
+      </button>
     </div>
   );
 }
