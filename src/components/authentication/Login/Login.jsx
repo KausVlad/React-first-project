@@ -1,9 +1,17 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { testFetch } from '../../../store/auth/auth.actions';
 
 export function Login() {
+  const dispatch = useDispatch();
+
+  const { status, testU, error } = useSelector((state) => state.auth);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  console.log(status, testU, error);
 
   return (
     <div>
@@ -21,7 +29,13 @@ export function Login() {
         onChange={(e) => setPassword(e.target.value)}
         value={password}
       />
-      <button>Login</button>
+      <button
+        onClick={() => {
+          dispatch(testFetch());
+        }}
+      >
+        Login
+      </button>
       <NavLink to="/registration">Sign up</NavLink>
     </div>
   );
