@@ -54,7 +54,7 @@ export const authSlice = createSlice({
       state.isLoading = true;
       state.error = '';
     },
-    [login.fulfilled]: (state, action) => {
+    [login.fulfilled]: (state) => {
       state.status = 'resolved';
       state.isLoading = false;
       state.isAuth = true;
@@ -75,13 +75,19 @@ export const authSlice = createSlice({
       state.status = 'resolved';
       state.error = action.payload;
     },
+    [checkAuth.pending]: (state) => {
+      state.status = 'loading';
+      state.isLoading = true;
+    },
     [checkAuth.fulfilled]: (state) => {
       state.isAuth = true;
       state.error = '';
+      state.isLoading = false;
     },
     [checkAuth.rejected]: (state, action) => {
       state.isAuth = false;
       state.error = action.payload;
+      state.isLoading = false;
     },
   },
 });

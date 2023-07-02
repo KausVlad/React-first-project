@@ -21,8 +21,10 @@ export default function Weather() {
   const { isAuth } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    dispatch(checkAuth());
-  }, [dispatch]);
+    if (!isAuth) {
+      dispatch(checkAuth());
+    }
+  }, [dispatch, isAuth]);
 
   useEffect(() => {
     const fetchData = async () => {

@@ -55,7 +55,6 @@ export function Login() {
       <button onClick={() => dispatch(login({ email, password }))}>
         11Login11
       </button>
-      <button onClick={() => dispatch(logout())}>\out\</button>
       <button onClick={() => dispatch(checkAuth())}>\XXXX\</button>
       <button onClick={() => dispatch(testFetch())}>\FFFFFF\</button>
       <NavLink to="/registration">Sign up</NavLink>
