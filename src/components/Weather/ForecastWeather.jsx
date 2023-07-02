@@ -7,8 +7,6 @@ import { getWeakenedDay } from './ForecastWeatherHelpers/getWeakenedDay';
 import { useSelector } from 'react-redux';
 
 export default function ForecastWeather() {
-  // console.log(list);
-
   const {
     forecastWeather: { list },
   } = useSelector((state) => state.weatherState);

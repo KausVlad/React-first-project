@@ -6,16 +6,22 @@ import { logout } from '../../store/auth/auth.actions';
 export function Menu() {
   const dispatch = useDispatch();
 
-  const { isAuth } = useSelector((state) => state.auth);
-  console.log(`isAuth: ${isAuth}`);
+  const { isAuth, userName } = useSelector((state) => state.auth);
+  console.log(`isAuth: ${isAuth}`, `userName: ${userName}`);
 
   return (
     <div className="menu">
       <NavLink className="about-link" to="/about">
         About
       </NavLink>
-      <NavLink to="/login">Log in</NavLink>
-      {isAuth && <a onClick={() => dispatch(logout())}>Log out</a>}
+      {!isAuth ? (
+        <NavLink to="/login">Log in</NavLink>
+      ) : (
+        <>
+          <a>{userName}</a>
+          <a onClick={() => dispatch(logout())}>Log out</a>
+        </>
+      )}
     </div>
   );
 }

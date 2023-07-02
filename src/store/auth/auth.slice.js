@@ -54,18 +54,19 @@ export const authSlice = createSlice({
       state.isLoading = true;
       state.error = '';
     },
-    [login.fulfilled]: (state) => {
+    [login.fulfilled]: (state, action) => {
       state.status = 'resolved';
       state.isLoading = false;
       state.isAuth = true;
+      console.log(action);
       state.error = '';
+      state.userName = action.payload.user.email.split('@')[0];
     },
     [login.rejected]: (state, action) => {
       state.userName = null;
       state.isLoading = false;
       state.status = 'rejected';
       state.isAuth = false;
-      console.log(action);
       state.error = action.payload.message;
     },
     [logout.fulfilled]: (state, action) => {
@@ -79,10 +80,11 @@ export const authSlice = createSlice({
       state.status = 'loading';
       state.isLoading = true;
     },
-    [checkAuth.fulfilled]: (state) => {
+    [checkAuth.fulfilled]: (state, action) => {
       state.isAuth = true;
       state.error = '';
       state.isLoading = false;
+      state.userName = action.payload.user.email.split('@')[0];
     },
     [checkAuth.rejected]: (state, action) => {
       state.isAuth = false;
