@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { $api } from '../../http/httpConfig';
+import { $api, API_URL } from '../../http/httpConfig';
+import axios from 'axios';
 
 export const testFetch = createAsyncThunk(
   'auth/testFetch',
@@ -9,7 +10,7 @@ export const testFetch = createAsyncThunk(
       console.log(fetchData);
       return fetchData.data;
     } catch (error) {
-      return rejectWithValue({ message: error.message });
+      return rejectWithValue({ message: error.response?.data?.message });
     }
   }
 );
@@ -23,7 +24,7 @@ export const reg = createAsyncThunk(
       console.log(fetchData);
       return fetchData.data;
     } catch (error) {
-      return rejectWithValue({ message: error.message });
+      return rejectWithValue({ message: error.response?.data?.message });
     }
   }
 );
@@ -37,7 +38,7 @@ export const login = createAsyncThunk(
       console.log(fetchData);
       return fetchData.data;
     } catch (error) {
-      return rejectWithValue({ message: error.message });
+      return rejectWithValue({ message: error.response?.data?.message });
     }
   }
 );
@@ -51,7 +52,23 @@ export const logout = createAsyncThunk(
       console.log(fetchData);
       return fetchData.data;
     } catch (error) {
-      return rejectWithValue({ message: error.message });
+      return rejectWithValue({ message: error.response?.data?.message });
+    }
+  }
+);
+
+export const checkAuth = createAsyncThunk(
+  'auth/checkAuth',
+  async (_, { rejectWithValue }) => {
+    try {
+      const fetchData = await axios.get(`${API_URL}/refresh`, {
+        withCredentials: true,
+      });
+      localStorage.setItem('token', fetchData.data.accessToken);
+      console.log(fetchData);
+      return fetchData.data;
+    } catch (error) {
+      return rejectWithValue({ message: error.response?.data?.message });
     }
   }
 );

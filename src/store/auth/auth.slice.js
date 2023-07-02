@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { testFetch, reg, login } from './auth.actions';
+import { testFetch, reg, login, logout, checkAuth } from './auth.actions';
 
 export const authSlice = createSlice({
   name: 'auth',
@@ -39,12 +39,14 @@ export const authSlice = createSlice({
       state.status = 'resolved';
       state.isLoading = false;
       state.userName = action.payload;
+      state.isAuth = true;
       state.error = '';
     },
-    [login.rejected]: (state, action) => {
+    [reg.rejected]: (state, action) => {
       state.userName = null;
       state.isLoading = false;
       state.status = 'rejected';
+      state.isAuth = false;
       state.error = action.payload;
     },
     [login.pending]: (state) => {
@@ -52,16 +54,33 @@ export const authSlice = createSlice({
       state.isLoading = true;
       state.error = '';
     },
-    [reg.fulfilled]: (state, action) => {
+    [login.fulfilled]: (state, action) => {
       state.status = 'resolved';
       state.isLoading = false;
       state.userName = action.payload;
+      state.isAuth = true;
       state.error = '';
     },
     [login.rejected]: (state, action) => {
       state.userName = null;
       state.isLoading = false;
       state.status = 'rejected';
+      state.isAuth = false;
+      state.error = action.payload;
+    },
+    [logout.fulfilled]: (state, action) => {
+      state.userName = null;
+      state.isLoading = false;
+      state.isAuth = false;
+      state.status = 'resolved';
+      state.error = action.payload;
+    },
+    [checkAuth.fulfilled]: (state) => {
+      state.isAuth = true;
+      state.error = '';
+    },
+    [checkAuth.rejected]: (state, action) => {
+      state.isAuth = false;
       state.error = action.payload;
     },
   },
