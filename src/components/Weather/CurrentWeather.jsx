@@ -1,8 +1,12 @@
 import { getWindDirection } from './CurrentWeatherHelpers/getWindDirection';
 import { getHumanUnderstandTime } from './utils/getHumanUnderstandTime';
 import { getClothingTips } from './CurrentWeatherHelpers/getClothingTips';
+import { useSelector } from 'react-redux';
 
-export default function CurrentWeather({ currentWeather }) {
+export default function CurrentWeather() {
+  const { currentWeather, forecastWeather } = useSelector(
+    (state) => state.weatherState
+  );
   const {
     weather: [{ description, icon }],
     main: {

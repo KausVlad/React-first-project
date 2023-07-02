@@ -1,11 +1,15 @@
-import WeatherAPI from './WeatherAPI/WeatherAPI';
 import CurrentWeather from './CurrentWeather';
 import ForecastWeather from './ForecastWeather';
 import { useEffect } from 'react';
 import './Weather.scss';
-import { setWeather } from '../../store/weatherState/weatherState.slice';
+import {
+  setCurrentWeather,
+  setForecastWeather,
+} from '../../store/weatherState/weatherState.slice';
 import { useDispatch, useSelector } from 'react-redux';
 import { LoadingSpinner } from './Loader';
+import { weatherCurrentAPI, weatherFutureAPI } from './WeatherAPI/WeatherAPI';
+import { checkCoordinates } from './utils/checkCoordinates';
 
 export default function Weather() {
   const dispatch = useDispatch();
@@ -13,37 +17,39 @@ export default function Weather() {
   const { coordinate, currentWeather, forecastWeather } = useSelector(
     (state) => state.weatherState
   );
+  const { isAuth } = useSelector((state) => state.auth);
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await WeatherAPI(
-        Object.keys(coordinate).length === 0
-          ? {
-              lat: 50.4500336,
-              lon: 30.5241361,
-            }
-          : coordinate
+      const weatherCurrent = await weatherCurrentAPI(
+        checkCoordinates(coordinate)
       );
-      dispatch(setWeather(data));
+      dispatch(setCurrentWeather(weatherCurrent));
     };
     fetchData();
   }, [coordinate, dispatch]);
 
+  useEffect(() => {
+    if (isAuth) {
+      const fetchData = async () => {
+        const weatherFuture = await weatherFutureAPI(
+          checkCoordinates(coordinate)
+        );
+        dispatch(setForecastWeather(weatherFuture));
+      };
+      fetchData();
+    } else {
+      dispatch(setForecastWeather(null));
+    }
+  }, [coordinate, dispatch, isAuth]);
+
   return (
     <div className="weather">
       <div className="current-weather">
-        {currentWeather ? (
-          <CurrentWeather currentWeather={currentWeather} />
-        ) : (
-          <LoadingSpinner />
-        )}
+        {currentWeather ? <CurrentWeather /> : <LoadingSpinner />}
       </div>
       <div className="forecast-weather">
-        {forecastWeather ? (
-          <ForecastWeather forecastWeather={forecastWeather} />
-        ) : (
-          <LoadingSpinner />
-        )}
+        {forecastWeather ? <ForecastWeather /> : <LoadingSpinner />}
       </div>
     </div>
   );

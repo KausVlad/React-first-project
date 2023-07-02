@@ -19,9 +19,12 @@ export const weatherStateSlice = createSlice({
     forecastWeather: null,
   },
   reducers: {
-    setWeather: (state, action) => {
-      state.currentWeather = action.payload[0];
-      state.forecastWeather = action.payload[1];
+    setCurrentWeather: (state, action) => {
+      state.currentWeather = action.payload;
+    },
+
+    setForecastWeather: (state, action) => {
+      state.forecastWeather = action.payload;
     },
 
     setCoordinate: (state, action) => {
@@ -56,7 +59,8 @@ export const weatherStateSlice = createSlice({
 
 export const {
   actions: {
-    setWeather,
+    setCurrentWeather,
+    setForecastWeather,
     setCoordinate,
     setCityName,
     resetCoordinate,

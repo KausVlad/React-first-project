@@ -4,13 +4,18 @@ import { getForecastModifier } from './ForecastWeatherHelpers/getForecastModifie
 import { getDayForecastSegment } from './ForecastWeatherHelpers/getDayForecastSegment';
 import { getDailyForecast } from './ForecastWeatherHelpers/getDailyForecast';
 import { getWeakenedDay } from './ForecastWeatherHelpers/getWeakenedDay';
+import { useSelector } from 'react-redux';
 
-export default function ForecastWeather({ forecastWeather: { list } }) {
+export default function ForecastWeather() {
   // console.log(list);
+
+  const {
+    forecastWeather: { list },
+  } = useSelector((state) => state.weatherState);
 
   const [forecastDay, setForecastDay] = useState(0);
 
-  const forecastModifier = getForecastModifier(list); //!є баг при 0 год початку при значенні мод 8
+  const forecastModifier = getForecastModifier(list);
 
   return (
     <>

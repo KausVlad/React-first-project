@@ -11,9 +11,7 @@ import {
 export function Login() {
   const dispatch = useDispatch();
 
-  const { status, isLoading, isAuth, error } = useSelector(
-    (state) => state.auth
-  );
+  const { status, isAuth, error } = useSelector((state) => state.auth);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
