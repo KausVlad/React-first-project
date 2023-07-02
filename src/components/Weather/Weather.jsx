@@ -11,6 +11,7 @@ import { LoadingSpinner } from './Loader';
 import { weatherCurrentAPI, weatherFutureAPI } from './WeatherAPI/WeatherAPI';
 import { checkCoordinates } from './utils/checkCoordinates';
 import { checkAuth } from '../../store/auth/auth.actions';
+import { NavLink } from 'react-router-dom';
 
 export default function Weather() {
   const dispatch = useDispatch();
@@ -56,7 +57,17 @@ export default function Weather() {
         {currentWeather ? <CurrentWeather /> : <LoadingSpinner />}
       </div>
       <div className="forecast-weather">
-        {forecastWeather ? <ForecastWeather /> : <LoadingSpinner />}
+        {forecastWeather ? (
+          <ForecastWeather />
+        ) : isAuth ? (
+          <LoadingSpinner />
+        ) : (
+          <div className="login-reminder">
+            <NavLink to="/login">
+              Log in if you want to see the full weather forecast
+            </NavLink>
+          </div>
+        )}
       </div>
     </div>
   );

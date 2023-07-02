@@ -131,6 +131,20 @@
   font-weight: 600;
 }
 
+.login-reminder {
+  font-size: 1.3rem;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background-color: var.$color-2;
+  a {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
 .forecast-hourly {
   font-size: 0.8rem;
   padding: 1rem;

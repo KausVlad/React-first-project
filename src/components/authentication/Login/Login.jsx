@@ -1,12 +1,7 @@
 import { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  checkAuth,
-  login,
-  logout,
-  testFetch,
-} from '../../../store/auth/auth.actions';
+import { checkAuth, login, testFetch } from '../../../store/auth/auth.actions';
 
 export function Login() {
   const dispatch = useDispatch();
