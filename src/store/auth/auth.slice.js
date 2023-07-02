@@ -57,7 +57,6 @@ export const authSlice = createSlice({
     [login.fulfilled]: (state, action) => {
       state.status = 'resolved';
       state.isLoading = false;
-      state.userName = action.payload;
       state.isAuth = true;
       state.error = '';
     },
@@ -66,7 +65,8 @@ export const authSlice = createSlice({
       state.isLoading = false;
       state.status = 'rejected';
       state.isAuth = false;
-      state.error = action.payload;
+      console.log(action);
+      state.error = action.payload.message;
     },
     [logout.fulfilled]: (state, action) => {
       state.userName = null;

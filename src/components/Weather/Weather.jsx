@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LoadingSpinner } from './Loader';
 import { weatherCurrentAPI, weatherFutureAPI } from './WeatherAPI/WeatherAPI';
 import { checkCoordinates } from './utils/checkCoordinates';
+import { checkAuth } from '../../store/auth/auth.actions';
 
 export default function Weather() {
   const dispatch = useDispatch();
@@ -18,6 +19,10 @@ export default function Weather() {
     (state) => state.weatherState
   );
   const { isAuth } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    dispatch(checkAuth());
+  }, [dispatch]);
 
   useEffect(() => {
     const fetchData = async () => {

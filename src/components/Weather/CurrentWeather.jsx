@@ -4,9 +4,7 @@ import { getClothingTips } from './CurrentWeatherHelpers/getClothingTips';
 import { useSelector } from 'react-redux';
 
 export default function CurrentWeather() {
-  const { currentWeather, forecastWeather } = useSelector(
-    (state) => state.weatherState
-  );
+  const { currentWeather } = useSelector((state) => state.weatherState);
   const {
     weather: [{ description, icon }],
     main: {
