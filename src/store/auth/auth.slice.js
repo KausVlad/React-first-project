@@ -38,16 +38,17 @@ export const authSlice = createSlice({
     [reg.fulfilled]: (state, action) => {
       state.status = 'resolved';
       state.isLoading = false;
-      state.userName = action.payload;
       state.isAuth = true;
+      console.log(action);
       state.error = '';
+      state.userName = action.payload.user.email.split('@')[0];
     },
     [reg.rejected]: (state, action) => {
       state.userName = null;
       state.isLoading = false;
       state.status = 'rejected';
       state.isAuth = false;
-      state.error = action.payload;
+      state.error = action.payload.message;
     },
     [login.pending]: (state) => {
       state.status = 'loading';

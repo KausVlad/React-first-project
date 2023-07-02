@@ -14,14 +14,15 @@ export function Menu() {
       <NavLink className="about-link" to="/about">
         About
       </NavLink>
-      {!isAuth ? (
-        <NavLink to="/login">Log in</NavLink>
-      ) : (
+      {isAuth ? (
         <>
           <a>{userName}</a>
           <a onClick={() => dispatch(logout())}>Log out</a>
         </>
+      ) : (
+        <NavLink to="/login">Log in</NavLink>
       )}
+      {!isAuth && <NavLink to="/registration">Sign up</NavLink>}
     </div>
   );
 }

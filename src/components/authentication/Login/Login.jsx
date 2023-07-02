@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { checkAuth, login, testFetch } from '../../../store/auth/auth.actions';
+import { login } from '../../../store/auth/auth.actions';
 
 export function Login() {
   const dispatch = useDispatch();
@@ -21,9 +21,7 @@ export function Login() {
   }, [isAuth, navigate]);
   const handleLogin = (e) => {
     e.preventDefault();
-    dispatch(login({ email, password })).catch((error) => {
-      console.log('Login failed:', error);
-    });
+    dispatch(login({ email, password }));
   };
 
   return (
@@ -47,12 +45,7 @@ export function Login() {
         />
         <button type="submit">Login</button>
       </form>
-      <button onClick={() => dispatch(login({ email, password }))}>
-        11Login11
-      </button>
-      <button onClick={() => dispatch(checkAuth())}>\XXXX\</button>
-      <button onClick={() => dispatch(testFetch())}>\FFFFFF\</button>
-      <NavLink to="/registration">Sign up</NavLink>
+      <NavLink to="/registration">No profile? Sign up</NavLink>
     </div>
   );
 }
