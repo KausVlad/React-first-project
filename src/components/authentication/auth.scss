@@ -1,0 +1,91 @@
+@use '../../assets/scss/variables' as var;
+
+.form-container {
+  display: grid;
+  place-items: center;
+  font-family: sans-serif;
+  color: #fff;
+  text-align: center;
+
+  label {
+    margin-bottom: 0.2rem;
+  }
+
+  input {
+    background: var.$color-2;
+    text-align: left;
+    padding: 0.5rem;
+    margin-bottom: 0.8rem;
+    width: 100%;
+  }
+
+  .error {
+    color: yellow;
+    font-size: 0.8rem;
+    text-transform: lowercase;
+    border-bottom: 1px solid yellow;
+  }
+
+  .error-email {
+    left: 0.5rem;
+    top: 3.5rem;
+    position: absolute;
+  }
+
+  .error-password {
+    left: 0.5rem;
+    top: 7.7rem;
+    position: absolute;
+  }
+
+  h2 {
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  a {
+    &:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+
+  button {
+    width: 7rem;
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+    padding: 1rem;
+    background: var.$color-1;
+    border: 2px solid var.$color-4;
+    &:hover {
+      background: var.$color-2;
+      border: 2px solid var.$color-4;
+      cursor: pointer;
+    }
+  }
+}
+
+::placeholder {
+  color: rgba(255, 255, 255, 0.743);
+}
+
+.auth-form {
+  width: 600px;
+  background: var.$color-3;
+  padding: 2rem;
+  margin: 0.5rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+@media screen and (max-width: 620px) {
+  .auth-form {
+    width: 100%;
+  }
+}

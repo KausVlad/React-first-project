@@ -11,7 +11,11 @@ export const authSlice = createSlice({
     isAuth: false,
     userName: '',
   },
-  reducers: {},
+  reducers: {
+    resetError: (state) => {
+      state.error = null;
+    },
+  },
   extraReducers: {
     [testFetch.pending]: (state) => {
       state.status = 'loading';
@@ -94,3 +98,8 @@ export const authSlice = createSlice({
     },
   },
 });
+
+export const {
+  actions: { resetError },
+  reducer,
+} = authSlice;
