@@ -17,6 +17,9 @@
     padding: 0.5rem;
     margin-bottom: 0.8rem;
     width: 100%;
+    &:focus {
+      outline: 1px dashed var.$color-1;
+    }
   }
 
   .error {
@@ -35,6 +38,12 @@
   .error-password {
     left: 0.5rem;
     top: 7.7rem;
+    position: absolute;
+  }
+
+  .error-password-match {
+    left: 0.5rem;
+    top: 10.6rem;
     position: absolute;
   }
 

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { reg } from '../../../store/auth/auth.actions';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { resetError } from '../../../store/auth/auth.slice';
 
 export function Registration() {
   const dispatch = useDispatch();
@@ -22,6 +23,14 @@ export function Registration() {
       navigate('/');
     }
   }, [isAuth, navigate]);
+
+  const passMatchCheck = (pas1, pas2) => {
+    if (pas1 === pas2) {
+      setPasMatch(true);
+    } else {
+      setPasMatch(false);
+    }
+  };
   const handleLogin = (e) => {
     e.preventDefault();
     if (password === passwordConfirm) {
@@ -32,41 +41,62 @@ export function Registration() {
   };
 
   return (
-    <div>
-      <form onSubmit={handleLogin}>
-        <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          name="email"
-          id="email"
-          placeholder="email"
-          required
-          onChange={(e) => setEmail(e.target.value)}
-          value={email}
-        />
-        <p>{error === 'User already exists' && 'User already exists'}</p>
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          placeholder="password"
-          required
-          onChange={(e) => setPassword(e.target.value)}
-          value={password}
-        />
-        <input
-          type="password"
-          name="confirm-password"
-          placeholder="confirm password"
-          required
-          onChange={(e) => setPasswordConfirm(e.target.value)}
-          value={passwordConfirm}
-        />
-        <p>{error || (!pasMatch && 'Passwords do not match')}</p>
-        <button type="submit">Sign up</button>
-      </form>
-      <NavLink to="/login">if you have a profile Log in</NavLink>
+    <div className="form-container">
+      <div className="auth-form">
+        <h2>Registration form</h2>
+        <form onSubmit={handleLogin}>
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="email"
+            required
+            onChange={(e) => {
+              dispatch(resetError());
+              setEmail(e.target.value);
+            }}
+            value={email}
+          />
+          <p className="error error-email">
+            {error === 'User already exists' && 'User already exists'}
+          </p>
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="password"
+            required
+            onChange={(e) => {
+              dispatch(resetError());
+              setPassword(e.target.value);
+            }}
+            value={password}
+          />
+          <input
+            type="password"
+            name="confirm-password"
+            autoComplete="off"
+            placeholder="confirm password"
+            required
+            onChange={(e) => {
+              passMatchCheck(e.target.value, password);
+              dispatch(resetError());
+              setPasswordConfirm(e.target.value);
+            }}
+            value={passwordConfirm}
+          />
+          <p className="error error-password-match">
+            {!pasMatch && 'Passwords do not match.'}{' '}
+            {error ===
+              'Invalid email or password. Password must be 3-30 characters.' &&
+              'Invalid email or password. Password must be 3-30 characters.'}
+          </p>
+          <button type="submit">Sign up</button>
+        </form>
+        <NavLink to="/login">if you have a profile Log in</NavLink>
+      </div>
     </div>
   );
 }
