@@ -8,6 +8,7 @@ export const apiKeysSlice = createSlice({
     isLoadingKey: false,
     testData: null,
     apiList: [],
+    selectedApiKey: 'b80c9a1acdfd7f1d2eff581bb8ae3bb3',
   },
   reducers: {},
   extraReducers: {

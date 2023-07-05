@@ -8,6 +8,7 @@ import {
 } from '../../store/apiKeys/apiKeys.actions';
 import { useEffect, useState } from 'react';
 import { checkAuth } from '../../store/auth/auth.actions';
+import del from '../SearchCity/svg/cancel.svg';
 
 export const AuthAdmin = () => {
   const dispatch = useDispatch();
@@ -58,8 +59,9 @@ export const AuthAdmin = () => {
         </button>
         {apiList.map((apiKey, index) => {
           return (
-            <p key={index} onClick={() => handleClick(index)}>
+            <p key={index}>
               {apiKey}
+              <img onClick={() => handleClick(index)} src={del} alt="del" />
             </p>
           );
         })}

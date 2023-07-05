@@ -20,6 +20,7 @@ export default function Weather() {
     (state) => state.weatherState
   );
   const { isAuth } = useSelector((state) => state.auth);
+  const { selectedApiKey } = useSelector((state) => state.apiKeys);
 
   useEffect(() => {
     if (!isAuth) {
@@ -30,18 +31,20 @@ export default function Weather() {
   useEffect(() => {
     const fetchData = async () => {
       const weatherCurrent = await weatherCurrentAPI(
-        checkCoordinates(coordinate)
+        checkCoordinates(coordinate),
+        selectedApiKey
       );
       dispatch(setCurrentWeather(weatherCurrent));
     };
     fetchData();
-  }, [coordinate, dispatch]);
+  }, [coordinate, dispatch, selectedApiKey]);
 
   useEffect(() => {
     if (isAuth) {
       const fetchData = async () => {
         const weatherFuture = await weatherFutureAPI(
-          checkCoordinates(coordinate)
+          checkCoordinates(coordinate),
+          selectedApiKey
         );
         dispatch(setForecastWeather(weatherFuture));
       };
@@ -49,7 +52,7 @@ export default function Weather() {
     } else {
       dispatch(setForecastWeather(null));
     }
-  }, [coordinate, dispatch, isAuth]);
+  }, [coordinate, dispatch, isAuth, selectedApiKey]);
 
   return (
     <div className="weather">

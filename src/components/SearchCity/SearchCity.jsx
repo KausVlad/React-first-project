@@ -18,6 +18,8 @@ function SearchCity() {
     (state) => state.weatherState
   );
 
+  const { selectedApiKey } = useSelector((state) => state.apiKeys);
+
   const [cityName, setCity] = useState('');
   const [locationData, setLocationData] = useState([]);
   let selectedState = Object.keys(coordinate).length === 0;
@@ -25,7 +27,7 @@ function SearchCity() {
 
   useEffect(() => {
     const debouncedGeocodingAPI = () => {
-      GeocodingAPI(setLocationData, cityName);
+      GeocodingAPI(setLocationData, cityName, selectedApiKey);
     };
 
     clearTimeout(timeoutIdRef.current);
@@ -35,7 +37,7 @@ function SearchCity() {
     return () => {
       clearTimeout(timeoutIdRef.current);
     };
-  }, [cityName]);
+  }, [cityName, selectedApiKey]);
 
   const handleClick = (index) => {
     dispatch(setCoordinate(locationData[index]));

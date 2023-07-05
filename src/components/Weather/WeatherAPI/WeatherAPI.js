@@ -1,10 +1,8 @@
-import { OPENWEATHER_API_KEY } from '../../SearchCity/GeocodingAPI/GeocodingAPI';
-
 const OPENWEATHER_URL_BASE = 'https://api.openweathermap.org/data/2.5/';
 
-export const weatherCurrentAPI = async ({ lat, lon }) => {
+export const weatherCurrentAPI = async ({ lat, lon }, selectedApiKey) => {
   try {
-    const urlCurrent = `${OPENWEATHER_URL_BASE}weather?lat=${lat}&lon=${lon}&appid=${OPENWEATHER_API_KEY}&units=metric`;
+    const urlCurrent = `${OPENWEATHER_URL_BASE}weather?lat=${lat}&lon=${lon}&appid=${selectedApiKey}&units=metric`;
 
     const responseCurrent = await fetch(urlCurrent);
     if (!responseCurrent.ok) {
@@ -21,9 +19,9 @@ export const weatherCurrentAPI = async ({ lat, lon }) => {
   }
 };
 
-export const weatherFutureAPI = async ({ lat, lon }) => {
+export const weatherFutureAPI = async ({ lat, lon }, selectedApiKey) => {
   try {
-    const url5Days = `${OPENWEATHER_URL_BASE}forecast?lat=${lat}&lon=${lon}&appid=${OPENWEATHER_API_KEY}&units=metric`;
+    const url5Days = `${OPENWEATHER_URL_BASE}forecast?lat=${lat}&lon=${lon}&appid=${selectedApiKey}&units=metric`;
 
     const response = await fetch(url5Days);
     if (!response.ok) {
