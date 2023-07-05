@@ -1,6 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { addApiKey, deleteApiKey, getAllApiKeys } from './apiKeys.actions';
 
+const [selectedApiKey, selectedApiKeyIndex] =
+  localStorage.getItem('API_KEY_STORED') !== null
+    ? JSON.parse(localStorage.getItem('API_KEY_STORED'))
+    : ['b80c9a1acdfd7f1d2eff581bb8ae3bb3', null];
+
 export const apiKeysSlice = createSlice({
   name: 'apiKeys',
   initialState: {
@@ -8,9 +13,16 @@ export const apiKeysSlice = createSlice({
     isLoadingKey: false,
     testData: null,
     apiList: [],
-    selectedApiKey: 'b80c9a1acdfd7f1d2eff581bb8ae3bb3',
+    selectedApiKey,
+    selectedApiKeyIndex,
   },
-  reducers: {},
+  reducers: {
+    setSelectedApiKey: (state, action) => {
+      [state.selectedApiKey, state.selectedApiKeyIndex] = action.payload;
+
+      localStorage.setItem('API_KEY_STORED', JSON.stringify(action.payload));
+    },
+  },
   extraReducers: {
     [addApiKey.pending]: (state) => {
       state.isLoadingKey = true;
@@ -50,3 +62,8 @@ export const apiKeysSlice = createSlice({
     },
   },
 });
+
+export const {
+  actions: { setSelectedApiKey },
+  reducer,
+} = apiKeysSlice;

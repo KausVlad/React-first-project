@@ -9,12 +9,15 @@ import {
 import { useEffect, useState } from 'react';
 import { checkAuth } from '../../store/auth/auth.actions';
 import del from '../SearchCity/svg/cancel.svg';
+import { setSelectedApiKey } from '../../store/apiKeys/apiKeys.slice';
 
 export const AuthAdmin = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { apiList } = useSelector((state) => state.apiKeys);
+  const { apiList, selectedApiKey, selectedApiKeyIndex } = useSelector(
+    (state) => state.apiKeys
+  );
   const { isAuth, userName } = useSelector((state) => state.auth);
 
   const [apiKey, setApiKey] = useState('');
@@ -35,11 +38,15 @@ export const AuthAdmin = () => {
   //   }
   // }, []);
 
-  const handleClick = (index) => {
+  const handleDelete = (index) => {
     dispatch(deleteApiKey({ emailName: userName, apiKeyIndex: index }));
   };
 
-  console.log(isAuth, userName, apiList);
+  const handleSelect = (index) => {
+    dispatch(setSelectedApiKey([apiList[index], index]));
+  };
+
+  console.log(isAuth, userName, apiList, selectedApiKey);
 
   return (
     <div className="auth-admin-container">
@@ -59,10 +66,13 @@ export const AuthAdmin = () => {
         </button>
         {apiList.map((apiKey, index) => {
           return (
-            <p key={index}>
-              {apiKey}
-              <img onClick={() => handleClick(index)} src={del} alt="del" />
-            </p>
+            <div
+              key={index}
+              className={index === selectedApiKeyIndex ? 'selected' : ''}
+            >
+              <p onClick={() => handleSelect(index)}>{apiKey}</p>
+              <img onClick={() => handleDelete(index)} src={del} alt="del" />
+            </div>
           );
         })}
       </div>
