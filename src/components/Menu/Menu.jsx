@@ -16,7 +16,7 @@ export function Menu() {
       </NavLink>
       {isAuth ? (
         <>
-          <a>{userName}</a>
+          <NavLink to="/userSettings">{userName.split('@')[0]}</NavLink>
           <a onClick={() => dispatch(logout())}>Log out</a>
         </>
       ) : (

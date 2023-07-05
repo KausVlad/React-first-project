@@ -45,7 +45,7 @@ export const authSlice = createSlice({
       state.isAuth = true;
       console.log(action);
       state.error = '';
-      state.userName = action.payload.user.email.split('@')[0];
+      state.userName = action.payload.user.email;
     },
     [reg.rejected]: (state, action) => {
       state.userName = null;
@@ -65,7 +65,7 @@ export const authSlice = createSlice({
       state.isAuth = true;
       console.log(action);
       state.error = '';
-      state.userName = action.payload.user.email.split('@')[0];
+      state.userName = action.payload.user.email;
     },
     [login.rejected]: (state, action) => {
       state.userName = null;

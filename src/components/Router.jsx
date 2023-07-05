@@ -3,6 +3,7 @@ import App from '../App';
 import { About } from './About/About';
 import { Login } from './authentication/Login/Login';
 import { Registration } from './authentication/Registration/Registration';
+import { AuthAdmin } from './authAdmin/AuthAdmin';
 
 export const Router = createBrowserRouter([
   {
@@ -20,5 +21,9 @@ export const Router = createBrowserRouter([
   {
     path: '/registration',
     element: <Registration />,
+  },
+  {
+    path: '/userSettings',
+    element: <AuthAdmin />,
   },
 ]);
