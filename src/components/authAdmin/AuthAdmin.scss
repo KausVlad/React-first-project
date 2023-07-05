@@ -20,3 +20,9 @@
     width: 100%;
   }
 }
+button {
+  color: var.$color-1;
+  &:disabled {
+    color: var.$color-2;
+  }
+}

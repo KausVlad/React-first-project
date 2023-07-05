@@ -46,6 +46,8 @@ export const AuthAdmin = () => {
     dispatch(setSelectedApiKey([apiList[index], index]));
   };
 
+  const isButtonDisabled = apiKey.length !== 32;
+
   console.log(isAuth, userName, apiList, selectedApiKey);
 
   return (
@@ -60,9 +62,10 @@ export const AuthAdmin = () => {
           onChange={(e) => setApiKey(e.target.value)}
         />
         <button
+          disabled={isButtonDisabled}
           onClick={() => dispatch(addApiKey({ emailName: userName, apiKey }))}
         >
-          test
+          Add new API key
         </button>
         {apiList.map((apiKey, index) => {
           return (
