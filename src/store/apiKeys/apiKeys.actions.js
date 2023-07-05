@@ -6,7 +6,6 @@ export const addApiKey = createAsyncThunk(
   async ({ emailName, apiKey }, { rejectWithValue }) => {
     try {
       const fetchData = await $api.post('/apiKeys', { emailName, apiKey });
-      console.log(fetchData);
       return fetchData.data;
     } catch (error) {
       return rejectWithValue({ message: error.response?.data?.message });
@@ -22,7 +21,6 @@ export const deleteApiKey = createAsyncThunk(
         emailName,
         apiKeyIndex,
       });
-      console.log(fetchData);
       return fetchData.data;
     } catch (error) {
       return rejectWithValue({ message: error.response?.data?.message });
@@ -35,7 +33,6 @@ export const getAllApiKeys = createAsyncThunk(
   async ({ emailName }, { rejectWithValue }) => {
     try {
       const fetchData = await $api.get(`/apiKeys/${emailName}`);
-      console.log(fetchData);
       return fetchData.data;
     } catch (error) {
       return rejectWithValue({ message: error.response?.data?.message });

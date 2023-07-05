@@ -43,7 +43,6 @@ export const authSlice = createSlice({
       state.status = 'resolved';
       state.isLoading = false;
       state.isAuth = true;
-      console.log(action);
       state.error = '';
       state.userName = action.payload.user.email;
     },
@@ -63,7 +62,6 @@ export const authSlice = createSlice({
       state.status = 'resolved';
       state.isLoading = false;
       state.isAuth = true;
-      console.log(action);
       state.error = '';
       state.userName = action.payload.user.email;
     },

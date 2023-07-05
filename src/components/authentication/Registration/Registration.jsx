@@ -8,15 +8,13 @@ export function Registration() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { status, isAuth, error } = useSelector((state) => state.auth);
+  const { isAuth, error } = useSelector((state) => state.auth);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
 
   const [pasMatch, setPasMatch] = useState(true);
-
-  console.log(`status: ${status}`, `isAuth: ${isAuth}`, `error : ${error}`);
 
   useEffect(() => {
     if (isAuth) {

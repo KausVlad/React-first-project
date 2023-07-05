@@ -48,7 +48,6 @@ export const AuthAdmin = () => {
         ? selectedApiKeyIndex - 1
         : selectedApiKeyIndex;
     dispatch(setSelectedApiKey([selectedApiKey, newIndex]));
-    console.log(selectedApiKey, selectedApiKeyIndex, index, newIndex);
   };
 
   const handleSelect = (index) => {
