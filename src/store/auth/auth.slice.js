@@ -89,7 +89,7 @@ export const authSlice = createSlice({
       state.isAuth = true;
       state.error = '';
       state.isLoading = false;
-      state.userName = action.payload.user.email.split('@')[0];
+      state.userName = action.payload.user.email;
     },
     [checkAuth.rejected]: (state, action) => {
       state.isAuth = false;

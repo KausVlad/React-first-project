@@ -7,7 +7,6 @@ export const testFetch = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const fetchData = await $api.get('/t');
-      console.log(fetchData);
       return fetchData.data;
     } catch (error) {
       return rejectWithValue({ message: error.response?.data?.message });
@@ -21,7 +20,6 @@ export const reg = createAsyncThunk(
     try {
       const fetchData = await $api.post('/reg', { email, password });
       localStorage.setItem('token', fetchData.data.accessToken);
-      console.log(fetchData);
       return fetchData.data;
     } catch (error) {
       return rejectWithValue({ message: error.response?.data?.message });
@@ -35,7 +33,6 @@ export const login = createAsyncThunk(
     try {
       const fetchData = await $api.post('/login', { email, password });
       localStorage.setItem('token', fetchData.data.accessToken);
-      console.log(fetchData);
       return fetchData.data;
     } catch (error) {
       return rejectWithValue({ message: error.response?.data?.message });
@@ -49,7 +46,6 @@ export const logout = createAsyncThunk(
     try {
       const fetchData = await $api.post('/logout');
       localStorage.removeItem('token');
-      console.log(fetchData);
       return fetchData.data;
     } catch (error) {
       return rejectWithValue({ message: error.response?.data?.message });
@@ -65,7 +61,6 @@ export const checkAuth = createAsyncThunk(
         withCredentials: true,
       });
       localStorage.setItem('token', fetchData.data.accessToken);
-      console.log(fetchData);
       return fetchData.data;
     } catch (error) {
       return rejectWithValue({ message: error.response?.data?.message });

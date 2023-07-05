@@ -7,7 +7,6 @@ export function Menu() {
   const dispatch = useDispatch();
 
   const { isAuth, userName } = useSelector((state) => state.auth);
-  console.log(`isAuth: ${isAuth}`, `userName: ${userName}`);
 
   return (
     <div className="menu">
