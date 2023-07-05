@@ -32,14 +32,23 @@ export const AuthAdmin = () => {
     dispatch(getAllApiKeys({ emailName: userName }));
   }, [dispatch, userName]);
 
-  // useEffect(() => {
-  //   if (!isAuth) {
-  //     navigate('/');
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (!isAuth) {
+      navigate('/');
+    }
+  }, []);
 
   const handleDelete = (index) => {
     dispatch(deleteApiKey({ emailName: userName, apiKeyIndex: index }));
+  };
+
+  const adjustIndex = (index) => {
+    const newIndex =
+      selectedApiKeyIndex > index
+        ? selectedApiKeyIndex - 1
+        : selectedApiKeyIndex;
+    dispatch(setSelectedApiKey([selectedApiKey, newIndex]));
+    console.log(selectedApiKey, selectedApiKeyIndex, index, newIndex);
   };
 
   const handleSelect = (index) => {
@@ -48,13 +57,11 @@ export const AuthAdmin = () => {
 
   const isButtonDisabled = apiKey.length !== 32;
 
-  console.log(isAuth, userName, apiList, selectedApiKey);
-
   return (
     <div className="auth-admin-container">
       <div className="auth-admin">
         <NavLink to="/">Back to weather ↩</NavLink>
-        <h1>Manage you apiKey</h1>
+        <h2>Manage you apiKey</h2>
         <input
           type="text"
           placeholder="Add new apiKey (32 characters)"
@@ -71,10 +78,23 @@ export const AuthAdmin = () => {
           return (
             <div
               key={index}
-              className={index === selectedApiKeyIndex ? 'selected' : ''}
+              className={`api-key ${
+                selectedApiKeyIndex === index ? 'api-key-selected' : ''
+              }`}
             >
-              <p onClick={() => handleSelect(index)}>{apiKey}</p>
-              <img onClick={() => handleDelete(index)} src={del} alt="del" />
+              <div className="api-key-value">
+                <p onClick={() => handleSelect(index)}>{apiKey}</p>
+                {selectedApiKeyIndex !== index && (
+                  <img
+                    onClick={() => {
+                      adjustIndex(index);
+                      handleDelete(index);
+                    }}
+                    src={del}
+                    alt="del"
+                  />
+                )}
+              </div>
             </div>
           );
         })}
