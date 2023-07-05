@@ -30,6 +30,7 @@ export const apiKeysSlice = createSlice({
       state.isLoadingKey = false;
       state.testData = action.payload;
       state.errorKey = null;
+      state.apiList = action.payload.apiKeys.apiKeys;
     },
     [deleteApiKey.rejected]: (state, action) => {
       state.isLoadingKey = false;
