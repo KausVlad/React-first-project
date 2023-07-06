@@ -5,6 +5,18 @@
   justify-content: center;
   font-family: sans-serif;
   color: #fff;
+  ol {
+    font-size: 1.2rem;
+    list-style: decimal;
+    list-style-position: inside;
+  }
+  ul {
+    padding: 1rem;
+    list-style-position: inside;
+    li {
+      margin-bottom: 0.4rem;
+    }
+  }
 }
 
 .about-container {
@@ -23,19 +35,6 @@
       text-decoration: underline;
       cursor: pointer;
     }
-  }
-}
-
-ol {
-  font-size: 1.2rem;
-  list-style: decimal;
-  list-style-position: inside;
-}
-ul {
-  padding: 1rem;
-  list-style-position: inside;
-  li {
-    margin-bottom: 0.4rem;
   }
 }
 
