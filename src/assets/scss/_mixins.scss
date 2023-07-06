@@ -1,9 +1,0 @@
-@use '_variables' as var;
-
-@mixin borderBottom() {
-  border-bottom: 0.2rem solid var.$color-3;
-}
-
-@mixin borderRight() {
-  border-right: 0.2rem solid var.$color-3;
-}
