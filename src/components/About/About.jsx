@@ -1,5 +1,5 @@
-import { NavLink } from 'react-router-dom';
-import './About.scss';
+import { NavLink } from "react-router-dom";
+import "./About.scss";
 
 export function About() {
   return (
@@ -12,57 +12,49 @@ export function About() {
         <div className="about">
           <ol>
             <li>
-              Показ поточної погоди:{' '}
+              Weather Display:{" "}
               <ul>
-                <li>Показує детальну інформацію про теперішню погоду.</li>
+                <li>Shows detailed information about the current weather.</li>
                 <li>
-                  Можливість авторизації для доступу до додаткових функцій.
+                  Option for authentication to access additional features.
                 </li>
               </ul>
             </li>
             <li>
-              Прогноз погоди на 5 днів:{' '}
+              5-Day Weather Forecast:{" "}
               <ul>
-                <li>Доступний лише для авторизованих користувачів.</li>
-                <li>Показує прогноз погоди на наступні 5 днів.</li>
+                <li>Available only for authenticated users.</li>
+                <li>Displays the weather forecast for the next 5 days.</li>
                 <li>
-                  Включає такі дані, як температура, вологість, швидкість вітру
-                  та інші показники.
+                  Includes data such as temperature, humidity, wind speed, and
+                  other indicators.
                 </li>
               </ul>
             </li>
             <li>
-              Реєстрація користувача:{' '}
+              User Registration:{" "}
+              <ul>
+                <li>Users without an account can register.</li>
+                <li>Required registration data: email and password.</li>
+              </ul>
+            </li>
+            <li>
+              City Weather Search:{" "}
               <ul>
                 <li>
-                  Користувачі, які не мають облікового запису, можуть
-                  зареєструватися.
+                  The application utilizes the GEO API to search for weather
+                  conditions in a specific city.
                 </li>
                 <li>
-                  Необхідні дані для реєстрації: електронна пошта та пароль.
+                  Users can enter the city name in the search field, and the
+                  application will find the weather for that location.
                 </li>
               </ul>
             </li>
             <li>
-              Пошук погоди за містом:{' '}
+              User Dashboard:{" "}
               <ul>
-                <li>
-                  Додаток використовує GEO API для пошуку погодних умов в
-                  певному місті.
-                </li>
-                <li>
-                  Користувач може ввести назву міста в поле пошуку, і додаток
-                  знайде погоду для цього місця.
-                </li>
-              </ul>
-            </li>
-            <li>
-              Кабінет користувача:{' '}
-              <ul>
-                <li>
-                  Опціональна можливість налаштування власних ключів для
-                  використання API.
-                </li>
+                <li>Optional feature to set up custom API keys for usage.</li>
               </ul>
             </li>
           </ol>
